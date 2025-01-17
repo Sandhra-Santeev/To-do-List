@@ -6,112 +6,185 @@
     <title>todo</title>
 </head>
 <style>
-    *{
-        margin:0;
-        padding:0;
-        box-sizing: border-box;
-        font-family: sans-serif;
-    }
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
 
-    .container{
-        width:100%;
-        min-height:100vh;
-        background: linear-gradient(135deg,lightblue,darkblue);
-        padding:10px;
-  
-    }
-    .todo_app{
-        width:100%;
-        max-width:540px;
-        background: #fff;
-        margin: 100px auto 20px;
-        padding: 40px 30px 70px;
-        border-radius: 10px;
+.container {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, lightblue, darkblue);
+    padding: 10px;
+}
 
-    }
+.todo_app {
+    width: 100%;
+    max-width: 540px;
+    background: #fff;
+    margin: 100px auto 20px;
+    padding: 40px 30px 70px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
 
-    .todo_app h2{
-        color:darkblue;
-        margin-bottom: 20px;
-    }
-    .row{
-        display:flex;
-        align-items: center;
-        justify-content: space-between;
-        background-color: rgb(217, 228, 232);
-        border-radius:30px;
-        padding-left:20px;
-        margin-bottom:25px;
-    }
+.todo_app h2 {
+    color: darkblue;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
 
-    input{
-        flex:1;
-        border:none;
-        outline:none;
-        background: transparent;
-        padding:10px;
-        font-size: 15px;
-        
-    }
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(217, 228, 232);
+    border-radius: 30px;
+    padding-left: 20px;
+    margin-bottom: 25px;
+}
 
-    button{
-        border:none;
-        outline:none;
-        padding: 16px 50px;
-        background:lightblue ;
-        color:darkblue;
-        cursor: pointer;
-        border-radius: 40px;
-    }
+input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 30px;
+}
 
-    ul li{
-        list-style: none;
-        font-size: 17px;
-        padding: 12px 8px  12px 50px;
-        user-select: none;
-        cursor:pointer;
-        position: relative;
-        
-    }
+button {
+    border: none;
+    outline: none;
+    padding: 16px 50px;
+    background: lightblue;
+    color: darkblue;
+    cursor: pointer;
+    border-radius: 40px;
+    transition: background-color 0.3s;
+}
 
-    ul li::before{
-        content:'';
-        position:absolute;
-        height:22px;
-        width:22px;
-        border-radius:50%;
-        background-image: url('https://cdn3.iconfinder.com/data/icons/arrows-160/96/uncheckedV_circle-512.png');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-        left:8px;
-       
-    }
-    ul li.checked{
-         color:#555;
-         text-decoration: line-through;
-    }
+button:hover {
+    background-color: #8ac7f9;
+}
 
-    ul li.checked::before{
-        background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnm9q-X6PMJApjzgZTQP-E0Vn3geuo6T_kzQ&s');
-    }
-   ul li span{
-       position: absolute;
-       right:0;
-       top:5px;
-       width: 40px;
-       height:40px;
-       font-size: 22px;
-       color:#555;
-       line-height:40px;
-       text-align: center;
+ul li {
+    list-style: none;
+    font-size: 17px;
+    padding: 12px 8px 12px 50px;
+    user-select: none;
+    cursor: pointer;
+    position: relative;
+}
 
-   }
+ul li::before {
+    content: '';
+    position: absolute;
+    height: 22px;
+    width: 22px;
+    border-radius: 50%;
+    background-image: url('https://cdn3.iconfinder.com/data/icons/arrows-160/96/uncheckedV_circle-512.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    left: 8px;
+}
 
-   ul li span:hover{
+ul li.checked {
+    color: #555;
+    text-decoration: line-through;
+}
+
+ul li.checked::before {
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnm9q-X6PMJApjzgZTQP-E0Vn3geuo6T_kzQ&s');
+}
+
+ul li span {
+    position: absolute;
+    right: 0;
+    top: 5px;
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+    color: #555;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+}
+
+ul li span:hover {
     background: #edeef0;
     border-radius: 100%;
-   }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .todo_app {
+        padding: 30px 20px 50px;
+    }
+
+    .todo_app h2 {
+        font-size: 22px;
+    }
+
+    .row input {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .row button {
+        padding: 14px 40px;
+        font-size: 14px;
+    }
+
+    ul li {
+        font-size: 16px;
+        padding: 10px 8px 10px 50px;
+    }
+
+    ul li span {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .todo_app {
+        margin-top: 50px;
+        padding: 20px;
+    }
+
+ 
+
+    .row input {
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 20px;
+        margin-bottom: 10px;
+    }
+
+    .row button {
+        padding: 14px;
+        font-size: 16px;
+        border-radius: 20px;
+    }
+
+    ul li {
+        font-size: 14px;
+        padding: 8px 8px 8px 40px;
+    }
+
+    ul li span {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+    }
+}
+
 
 
 </style>

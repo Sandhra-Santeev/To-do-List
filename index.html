@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todo</title>
+</head>
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing: border-box;
+        font-family: sans-serif;
+    }
+
+    .container{
+        width:100%;
+        min-height:100vh;
+        background: linear-gradient(135deg,lightblue,darkblue);
+        padding:10px;
+  
+    }
+    .todo_app{
+        width:100%;
+        max-width:540px;
+        background: #fff;
+        margin: 100px auto 20px;
+        padding: 40px 30px 70px;
+        border-radius: 10px;
+
+    }
+
+    .todo_app h2{
+        color:darkblue;
+        margin-bottom: 20px;
+    }
+    .row{
+        display:flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: rgb(217, 228, 232);
+        border-radius:30px;
+        padding-left:20px;
+        margin-bottom:25px;
+    }
+
+    input{
+        flex:1;
+        border:none;
+        outline:none;
+        background: transparent;
+        padding:10px;
+        font-size: 15px;
+        
+    }
+
+    button{
+        border:none;
+        outline:none;
+        padding: 16px 50px;
+        background:lightblue ;
+        color:darkblue;
+        cursor: pointer;
+        border-radius: 40px;
+    }
+
+    ul li{
+        list-style: none;
+        font-size: 17px;
+        padding: 12px 8px  12px 50px;
+        user-select: none;
+        cursor:pointer;
+        position: relative;
+        
+    }
+
+    ul li::before{
+        content:'';
+        position:absolute;
+        height:22px;
+        width:22px;
+        border-radius:50%;
+        background-image: url('https://cdn3.iconfinder.com/data/icons/arrows-160/96/uncheckedV_circle-512.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        left:8px;
+       
+    }
+    ul li.checked{
+         color:#555;
+         text-decoration: line-through;
+    }
+
+    ul li.checked::before{
+        background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnm9q-X6PMJApjzgZTQP-E0Vn3geuo6T_kzQ&s');
+    }
+   ul li span{
+       position: absolute;
+       right:0;
+       top:5px;
+       width: 40px;
+       height:40px;
+       font-size: 22px;
+       color:#555;
+       line-height:40px;
+       text-align: center;
+
+   }
+
+   ul li span:hover{
+    background: #edeef0;
+    border-radius: 100%;
+   }
+
+
+</style>
+<body>
+    <div class="container">
+        <div class="todo_app">
+            <h2>To-do List</h2>
+            <div class="row">
+                <input type="text" placeholder="Enter task" id="input_box">
+                <button onclick="add()">ADD</button>
+            </div>
+            <ul id="list_container">
+                <!-- <li class="checked">T1</li>
+                <li>T2</li>
+                <li>T3</li> -->
+            </ul>
+
+        </div>
+    </div>
+
+
+<script>
+    const inputBox = document.getElementById("input_box");
+    const listContainer = document.getElementById("list_container");
+    function add(){
+        if(inputBox.value === ''){
+            alert("You must write something")
+        }
+        else{
+            let li =document.createElement("li");
+            li.innerHTML = inputBox.value;
+            listContainer.appendChild(li)
+            let span = document.createElement("span")
+            span.innerHTML="\u00d7"
+            li.append(span)
+
+
+        }
+        inputBox.value = "";
+        savedata()
+    }
+
+    listContainer.addEventListener("click",function(e){
+        if(e.target.tagName=="LI"){
+            e.target.classList.toggle("checked");
+            savedata()
+
+
+        }
+        else if(e.target.tagName === "SPAN"){
+            e.target.parentElement.remove();
+            savedata()
+        }
+    },false)
+
+    function savedata(){
+        localStorage.setItem("data",listContainer.innerHTML);
+    }
+
+    function showTask(){
+        listContainer.innerHTML = localStorage.getItem("data")
+    }
+    showTask()
+
+
+</script>
+    
+</body>
+</html>
